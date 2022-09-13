@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-SwiftHTML-SwiftHTMLUITests/Pods-SwiftHTML-SwiftHTMLUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework
+${BUILT_PRODUCTS_DIR}/CocoaHTTPServer/CocoaHTTPServer.framework
+${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework
+${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework

@@ -1,0 +1,6 @@
+module Pods_SwiftHTML_SwiftHTMLUITests {
+  umbrella header "Pods-SwiftHTML-SwiftHTMLUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

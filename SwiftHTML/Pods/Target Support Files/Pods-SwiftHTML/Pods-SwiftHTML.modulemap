@@ -1,0 +1,6 @@
+module Pods_SwiftHTML {
+  umbrella header "Pods-SwiftHTML-umbrella.h"
+
+  export *
+  module * { export * }
+}
