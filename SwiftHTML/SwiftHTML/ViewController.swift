@@ -32,13 +32,15 @@ class MLCellModel: NSObject {
     var title: String = ""
     var bundleName: String = ""
     var relativePath: String = ""
+    var remoteUrlStr: String?
     
-    convenience init(type: MLCellType, title: String, bundleName: String, relativePath: String) {
+    convenience init(type: MLCellType, title: String, bundleName: String, relativePath: String, remoteUrlStr: String?) {
         self.init()
         self.type = type
         self.title = title
         self.bundleName = bundleName
         self.relativePath = relativePath
+        self.remoteUrlStr = remoteUrlStr
     }
     
     func documentRoot() -> String {
@@ -77,7 +79,9 @@ class ViewController: UIViewController {
     }
     
     func initData() {
-        let types: [MLCellType] = [.sde]
+        let types: [MLCellType] = [.none,
+                                   .none,
+                                   .sde]
         /*[.android_alibaba_java,
                                    .ios,
                                    .ios_interview,
@@ -90,7 +94,9 @@ class ViewController: UIViewController {
                                    .korean,
                                    .japan]*/
         
-        let titles: [String] = ["《软件设计工程师 (Software Design Engineer)》"]
+        let titles: [String] = ["百度",
+                                "微博热搜榜",
+                                "《软件设计工程师 (Software Design Engineer)》"]
             /*["《阿里巴巴Java开发手册》",
                                 "《iOS》",
                                 "《iOS 工程师技能树》",
@@ -105,7 +111,7 @@ class ViewController: UIViewController {
         
         let bundleName = "sde"
         
-        let relativePaths = ["/index.html"]
+        let relativePaths = ["","","/index.html"]
             /*["/gitbook/Android-Alibaba-Java/index.html",
                              "/gitbook/iOS/index.html",
                              "/gitbook/iOS-interview/index.html",
@@ -118,8 +124,10 @@ class ViewController: UIViewController {
                              "/blog/korean.html",
                              "/blog/japan.html"]*/
         
+        let remoteUrlStrs = ["https://www.baidu.com", "https://s.weibo.com/top/summary", ""]
+        
         for i in 0..<types.count {
-            let model = MLCellModel(type: types[i], title: titles[i], bundleName: bundleName, relativePath: relativePaths[i])
+            let model = MLCellModel(type: types[i], title: titles[i], bundleName: bundleName, relativePath: relativePaths[i], remoteUrlStr: remoteUrlStrs[i])
             dataArray.append(model)
         }
         tableView.reloadData()

@@ -238,6 +238,11 @@ GitBook version: 3.2.2
 import UIKit
 import WebKit
 
+enum ReadType {
+    case learning
+    case examination
+}
+
 class WebViewController: UIViewController {
     
     static let kObserveKeyPath = "url"
@@ -248,7 +253,11 @@ class WebViewController: UIViewController {
     
     var progress: UIProgressView?
     
-    var model: MLCellModel?
+    var model: MLCellModel!
+    
+    var readType: ReadType = .learning
+    
+    var switchBtn: UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -280,14 +289,6 @@ class WebViewController: UIViewController {
             make.height.equalTo(2)
         }
         
-        let btn = UIButton(type: .custom)
-        btn.setTitleColor(.blue, for: .normal)
-        btn.frame = CGRect(origin: .zero, size: CGSize(width: 44, height: 44))
-        btn.setTitle("Top", for: .normal)
-        btn.addTarget(self, action: #selector(self.test), for: .touchUpInside)
-        let rightBarItem = UIBarButtonItem(customView: btn)
-        navigationItem.rightBarButtonItem = rightBarItem
-        
 //        let result = moveAppBundleToTempDir()
 //        if result.success {
 //            let htmlBundle = Bundle.init(path: result.path!)
@@ -300,13 +301,37 @@ class WebViewController: UIViewController {
         guard (model != nil) else {
             return
         }
-        let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        delegate.httpServer.setDocumentRoot(model?.documentRoot())
-        delegate.startServer()
-        let localHttpAddress = "http://localhost:\(delegate.httpServer.port())\(model?.relativePath ?? "")"
-//        let localHttpAddress = "https://www.baidu.com"//test
-        print(localHttpAddress)
-        webView?.load(URLRequest(url: URL(string: localHttpAddress)!))
+        
+        if model.type == .none {
+            webView?.load(URLRequest(url: URL(string: model.remoteUrlStr ?? "")!))
+        } else {
+            let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            delegate.httpServer.setDocumentRoot(model?.documentRoot())
+            delegate.startServer()
+            let localHttpAddress = "http://localhost:\(delegate.httpServer.port())\(model?.relativePath ?? "")"
+            webView?.load(URLRequest(url: URL(string: localHttpAddress)!))
+        }
+        
+        let btn = UIButton(type: .custom)
+        btn.setTitleColor(.blue, for: .normal)
+        btn.frame = CGRect(origin: .zero, size: CGSize(width: 44, height: 44))
+        btn.setTitle("🔝", for: .normal)
+        btn.addTarget(self, action: #selector(self.test), for: .touchUpInside)
+        let scrollToTopBtn = UIBarButtonItem(customView: btn)
+        
+        let btn2 = UIButton(type: .custom)
+        btn2.setTitleColor(.blue, for: .normal)
+        btn2.frame = CGRect(origin: .zero, size: CGSize(width: 44, height: 44))
+        btn2.setTitle("答题", for: .normal)
+        btn2.addTarget(self, action: #selector(self.switchBtnClicked(sender:)), for: .touchUpInside)
+        let readTypeSwitchBtn = UIBarButtonItem(customView: btn2)
+        switchBtn = readTypeSwitchBtn
+        
+        if model.type == .none {
+            navigationItem.rightBarButtonItem = scrollToTopBtn
+        } else {
+            navigationItem.rightBarButtonItem = readTypeSwitchBtn
+        }
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -420,6 +445,21 @@ class WebViewController: UIViewController {
          */
     }
     
+    @objc func switchBtnClicked(sender: UIButton) {
+        if readType == .learning {
+            readType = .examination
+            sender.setTitle("学习", for: .normal)
+            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"inline\" && arrayOfDocFonts[i].className != \"back-to-top\"){console.log(arrayOfDocFonts[i]);arrayOfDocFonts[i].style.setProperty('display','none');console.log('========')}}"
+            webView?.evaluateJavaScript(script, completionHandler: nil)
+        } else {
+            readType = .learning
+            sender.setTitle("答题", for: .normal)
+            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"none\" && arrayOfDocFonts[i].className != \"back-to-top\"){console.log(arrayOfDocFonts[i]);arrayOfDocFonts[i].style.setProperty('display','inline');console.log('========')}}"
+            webView?.evaluateJavaScript(script, completionHandler: nil)
+        }
+        
+    }
+    
     func setUpWKwebView() -> WKWebView {
         let preferences = WKPreferences()
 //        preferences.javaScriptEnabled = true
@@ -487,7 +527,7 @@ extension WebViewController: WKNavigationDelegate {
             return
         }
         var policy: WKNavigationActionPolicy = .allow
-        if navigationAction.navigationType == .linkActivated {
+        if !url.absoluteString.hasPrefix("http") && navigationAction.navigationType == .linkActivated {
             if  UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 policy = .cancel
