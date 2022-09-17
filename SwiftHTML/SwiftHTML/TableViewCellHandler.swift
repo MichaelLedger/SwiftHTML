@@ -445,16 +445,21 @@ class WebViewController: UIViewController {
          */
     }
     
+    /*
+     用 CSS 隐藏页面元素有许多种方法。你可以将 opacity 设为 0、将 visibility 设为 hidden、将 display 设为 none 或者将 position 设为 absolute 然后将位置设到不可见区域
+     
+     这里我们只是隐藏，物理位置不变，方便来回切换查看而保持布局不变。
+     */
     @objc func switchBtnClicked(sender: UIButton) {
         if readType == .learning {
             readType = .examination
             sender.setTitle("学习", for: .normal)
-            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"inline\" && arrayOfDocFonts[i].className != \"back-to-top\"){console.log(arrayOfDocFonts[i]);arrayOfDocFonts[i].style.setProperty('display','none');console.log('========')}}"
+            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"inline\" && arrayOfDocFonts[i].className != \"back-to-top\"){console.log(arrayOfDocFonts[i]);arrayOfDocFonts[i].style.setProperty('visibility','hidden');console.log('========')}}"
             webView?.evaluateJavaScript(script, completionHandler: nil)
         } else {
             readType = .learning
             sender.setTitle("答题", for: .normal)
-            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"none\" && arrayOfDocFonts[i].className != \"back-to-top\"){console.log(arrayOfDocFonts[i]);arrayOfDocFonts[i].style.setProperty('display','inline');console.log('========')}}"
+            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"inline\" && arrayOfDocFonts[i].className != \"back-to-top\"){console.log(arrayOfDocFonts[i]);arrayOfDocFonts[i].style.setProperty('visibility','visible');console.log('========')}}"
             webView?.evaluateJavaScript(script, completionHandler: nil)
         }
         
@@ -521,16 +526,22 @@ extension WebViewController: WKNavigationDelegate {
             decisionHandler(.cancel)
             return
         }
-        print("decidePolicyFor:\n\(url)")
-        guard url.host != "localhost" else {
-            decisionHandler(.allow)//always allow for local navigation action
-            return
-        }
+//        print("decidePolicyFor:\n\(url)")
+//        guard url.host != "localhost" else {
+//            decisionHandler(.allow)//always allow for local navigation action
+//            return
+//        }
         var policy: WKNavigationActionPolicy = .allow
-        if !url.absoluteString.hasPrefix("http") && navigationAction.navigationType == .linkActivated {
-            if  UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                policy = .cancel
+        if navigationAction.navigationType == .linkActivated {//跳转别的应用如系统浏览器
+            if model.type == .none {
+                //除了gitbook，其他外链，防止在WKWebView中打开Universal Link，强制禁止跳转其他app，方便在当前app进行了浏览
+                policy = WKNavigationActionPolicy(rawValue: 1 + 2)!//返回.allow+2的枚举值 _WKNavigationActionPolicyAllowWithoutTryingAppLink
+            } else {
+                if  UIApplication.shared.canOpenURL(url) {// 对于跨域，需要手动跳转
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    // 不允许web内跳转
+                    policy = .cancel
+                }
             }
         }
         decisionHandler(policy)
