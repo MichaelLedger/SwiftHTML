@@ -109,9 +109,9 @@ class ViewController: UIViewController {
                                 "Blog - Korean",
                                 "Blog - Japan"]*/
         
-        let bundleName = "sde"
+        let bundleName = "gitbook"
         
-        let relativePaths = ["","","/index.html"]
+        let relativePaths = ["","","/sde/index.html"]
             /*["/gitbook/Android-Alibaba-Java/index.html",
                              "/gitbook/iOS/index.html",
                              "/gitbook/iOS-interview/index.html",

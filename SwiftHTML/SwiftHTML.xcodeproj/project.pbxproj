@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		30250E593609EA7DADCE13E1 /* libPods-SwiftHTMLTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0338C1938D11DDC9E8B2ADC /* libPods-SwiftHTMLTests.a */; };
-		574DD7B528D0A629001D51AE /* sde.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 574DD7B428D0A629001D51AE /* sde.bundle */; };
 		5790E81728C4855D002421DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E81628C4855D002421DE /* AppDelegate.swift */; };
 		5790E81928C4855D002421DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E81828C4855D002421DE /* SceneDelegate.swift */; };
 		5790E81B28C4855D002421DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E81A28C4855D002421DE /* ViewController.swift */; };
@@ -18,6 +17,7 @@
 		5790E82E28C4855E002421DE /* SwiftHTMLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E82D28C4855E002421DE /* SwiftHTMLTests.swift */; };
 		5790E83928C4855E002421DE /* SwiftHTMLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E83828C4855E002421DE /* SwiftHTMLUITests.swift */; };
 		5790E85B28C48B75002421DE /* TableViewCellHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E85A28C48B75002421DE /* TableViewCellHandler.swift */; };
+		57A76A9728D8BB12001622C2 /* gitbook.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 57A76A9628D8BB12001622C2 /* gitbook.bundle */; };
 		A4F42C80A0785B80709ACC2A /* libPods-SwiftHTML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92A8BACA0D4CA6DCBAFF3A24 /* libPods-SwiftHTML.a */; };
 		EF1A767DECC196699DF6AB32 /* libPods-SwiftHTML-SwiftHTMLUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDB117B35039959A9CC8906 /* libPods-SwiftHTML-SwiftHTMLUITests.a */; };
 /* End PBXBuildFile section */
@@ -40,7 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		574DD7B428D0A629001D51AE /* sde.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = sde.bundle; path = ../../Resources/sde.bundle; sourceTree = "<group>"; };
 		5786A94C28C59FF800343358 /* SwiftHTML-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftHTML-Bridging-Header.h"; sourceTree = "<group>"; };
 		5790E81328C4855D002421DE /* SwiftHTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftHTML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5790E81628C4855D002421DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +56,7 @@
 		5790E83828C4855E002421DE /* SwiftHTMLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftHTMLUITests.swift; sourceTree = "<group>"; };
 		5790E83A28C4855E002421DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5790E85A28C48B75002421DE /* TableViewCellHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellHandler.swift; sourceTree = "<group>"; };
+		57A76A9628D8BB12001622C2 /* gitbook.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = gitbook.bundle; path = ../../Resources/gitbook.bundle; sourceTree = "<group>"; };
 		5DCAE3F94B68604657C6009F /* Pods-SwiftHTML-SwiftHTMLUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHTML-SwiftHTMLUITests.debug.xcconfig"; path = "Target Support Files/Pods-SwiftHTML-SwiftHTMLUITests/Pods-SwiftHTML-SwiftHTMLUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		92A8BACA0D4CA6DCBAFF3A24 /* libPods-SwiftHTML.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftHTML.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		944F17EA9AD748BA3C9AA39D /* Pods-SwiftHTML.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHTML.debug.xcconfig"; path = "Target Support Files/Pods-SwiftHTML/Pods-SwiftHTML.debug.xcconfig"; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		5790E81528C4855D002421DE /* SwiftHTML */ = {
 			isa = PBXGroup;
 			children = (
-				574DD7B428D0A629001D51AE /* sde.bundle */,
+				57A76A9628D8BB12001622C2 /* gitbook.bundle */,
 				5790E81628C4855D002421DE /* AppDelegate.swift */,
 				5790E81828C4855D002421DE /* SceneDelegate.swift */,
 				5790E81A28C4855D002421DE /* ViewController.swift */,
@@ -284,8 +284,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5790E82328C4855D002421DE /* LaunchScreen.storyboard in Resources */,
+				57A76A9728D8BB12001622C2 /* gitbook.bundle in Resources */,
 				5790E82028C4855D002421DE /* Assets.xcassets in Resources */,
-				574DD7B528D0A629001D51AE /* sde.bundle in Resources */,
 				5790E81E28C4855D002421DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
