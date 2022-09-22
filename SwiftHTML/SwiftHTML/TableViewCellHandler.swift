@@ -330,7 +330,7 @@ class WebViewController: UIViewController {
         if model.type == .none {
             navigationItem.rightBarButtonItem = scrollToTopBtn
         } else {
-            navigationItem.rightBarButtonItem = readTypeSwitchBtn
+//            navigationItem.rightBarButtonItem = readTypeSwitchBtn
         }
     }
     
@@ -454,12 +454,12 @@ class WebViewController: UIViewController {
         if readType == .learning {
             readType = .examination
             sender.setTitle("学习", for: .normal)
-            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"inline\" && arrayOfDocFonts[i].className != \"back-to-top\"){console.log(arrayOfDocFonts[i]);arrayOfDocFonts[i].style.setProperty('visibility','hidden');console.log('========')}}"
+            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"inline\" && arrayOfDocFonts[i].className != \"back-to-top\"){arrayOfDocFonts[i].style.setProperty('visibility','hidden');}}"
             webView?.evaluateJavaScript(script, completionHandler: nil)
         } else {
             readType = .learning
             sender.setTitle("答题", for: .normal)
-            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"inline\" && arrayOfDocFonts[i].className != \"back-to-top\"){console.log(arrayOfDocFonts[i]);arrayOfDocFonts[i].style.setProperty('visibility','visible');console.log('========')}}"
+            let script = "var arrayOfDocFonts = document.getElementsByTagName(\"div\");for (var i = 0; i < arrayOfDocFonts.length; i++) {if (arrayOfDocFonts[i].style.display == \"inline\" && arrayOfDocFonts[i].className != \"back-to-top\"){arrayOfDocFonts[i].style.setProperty('visibility','visible');}}"
             webView?.evaluateJavaScript(script, completionHandler: nil)
         }
         

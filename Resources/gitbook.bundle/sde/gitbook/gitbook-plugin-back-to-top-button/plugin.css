@@ -20,7 +20,7 @@
     top: 14px;
     font-size: 22px;
 }
-.back-to-top:hover {
+.back-to-top:active {
     background: rgba(0, 0, 0, 0.9);
     cursor: pointer;	
 }
@@ -30,7 +30,7 @@
 .book.color-theme-1 .back-to-top i {
     color: #f3eacb;
 }
-.book.color-theme-1 .back-to-top:hover {
+.book.color-theme-1 .back-to-top:active {
     background: rgba(112, 66, 20, 0.9);
 }
 .book.color-theme-2 .back-to-top {
@@ -39,7 +39,7 @@
 .book.color-theme-2 .back-to-top i {
     color: #1C1F2B;
 }
-.book.color-theme-2 .back-to-top:hover {
+.book.color-theme-2 .back-to-top:active {
     background: rgba(189, 202, 219, 0.9);
 }
 
