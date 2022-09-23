@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30250E593609EA7DADCE13E1 /* libPods-SwiftHTMLTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0338C1938D11DDC9E8B2ADC /* libPods-SwiftHTMLTests.a */; };
+		43B0D490A201FDF9EBB25816 /* libPods-SwiftHTML-SwiftHTMLUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CBF9FC746ABC398DC70121 /* libPods-SwiftHTML-SwiftHTMLUITests.a */; };
 		5790E81728C4855D002421DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E81628C4855D002421DE /* AppDelegate.swift */; };
 		5790E81928C4855D002421DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E81828C4855D002421DE /* SceneDelegate.swift */; };
 		5790E81B28C4855D002421DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E81A28C4855D002421DE /* ViewController.swift */; };
@@ -18,8 +18,9 @@
 		5790E83928C4855E002421DE /* SwiftHTMLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E83828C4855E002421DE /* SwiftHTMLUITests.swift */; };
 		5790E85B28C48B75002421DE /* TableViewCellHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E85A28C48B75002421DE /* TableViewCellHandler.swift */; };
 		57A76A9728D8BB12001622C2 /* gitbook.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 57A76A9628D8BB12001622C2 /* gitbook.bundle */; };
-		A4F42C80A0785B80709ACC2A /* libPods-SwiftHTML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92A8BACA0D4CA6DCBAFF3A24 /* libPods-SwiftHTML.a */; };
-		EF1A767DECC196699DF6AB32 /* libPods-SwiftHTML-SwiftHTMLUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDB117B35039959A9CC8906 /* libPods-SwiftHTML-SwiftHTMLUITests.a */; };
+		589EBB819755F4E91BF3528F /* libPods-SwiftHTML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBCBDF8D0554D4DA79C89673 /* libPods-SwiftHTML.a */; };
+		674EBCDA28DD36990086E682 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674EBCD928DD36990086E682 /* WebViewController.swift */; };
+		B4EDE8B53D0D75F2844AF470 /* libPods-SwiftHTMLTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC09C037FB015EFF97642F0C /* libPods-SwiftHTMLTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,14 +59,15 @@
 		5790E85A28C48B75002421DE /* TableViewCellHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellHandler.swift; sourceTree = "<group>"; };
 		57A76A9628D8BB12001622C2 /* gitbook.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = gitbook.bundle; path = ../../Resources/gitbook.bundle; sourceTree = "<group>"; };
 		5DCAE3F94B68604657C6009F /* Pods-SwiftHTML-SwiftHTMLUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHTML-SwiftHTMLUITests.debug.xcconfig"; path = "Target Support Files/Pods-SwiftHTML-SwiftHTMLUITests/Pods-SwiftHTML-SwiftHTMLUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		92A8BACA0D4CA6DCBAFF3A24 /* libPods-SwiftHTML.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftHTML.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		674EBCD928DD36990086E682 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		79CBF9FC746ABC398DC70121 /* libPods-SwiftHTML-SwiftHTMLUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftHTML-SwiftHTMLUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		944F17EA9AD748BA3C9AA39D /* Pods-SwiftHTML.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHTML.debug.xcconfig"; path = "Target Support Files/Pods-SwiftHTML/Pods-SwiftHTML.debug.xcconfig"; sourceTree = "<group>"; };
 		A2D80BE9C1BFAEDFEC3090CB /* Pods-SwiftHTML-SwiftHTMLUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHTML-SwiftHTMLUITests.release.xcconfig"; path = "Target Support Files/Pods-SwiftHTML-SwiftHTMLUITests/Pods-SwiftHTML-SwiftHTMLUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AAB7C6D77792B375E865C4F7 /* Pods-SwiftHTMLTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHTMLTests.debug.xcconfig"; path = "Target Support Files/Pods-SwiftHTMLTests/Pods-SwiftHTMLTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C0338C1938D11DDC9E8B2ADC /* libPods-SwiftHTMLTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftHTMLTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCDB117B35039959A9CC8906 /* libPods-SwiftHTML-SwiftHTMLUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftHTML-SwiftHTMLUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDC6CB71A84E187A6C431909 /* Pods-SwiftHTML.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHTML.release.xcconfig"; path = "Target Support Files/Pods-SwiftHTML/Pods-SwiftHTML.release.xcconfig"; sourceTree = "<group>"; };
 		EE68BFB25C04804B7FE28DA7 /* Pods-SwiftHTMLTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHTMLTests.release.xcconfig"; path = "Target Support Files/Pods-SwiftHTMLTests/Pods-SwiftHTMLTests.release.xcconfig"; sourceTree = "<group>"; };
+		FBCBDF8D0554D4DA79C89673 /* libPods-SwiftHTML.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftHTML.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC09C037FB015EFF97642F0C /* libPods-SwiftHTMLTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftHTMLTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4F42C80A0785B80709ACC2A /* libPods-SwiftHTML.a in Frameworks */,
+				589EBB819755F4E91BF3528F /* libPods-SwiftHTML.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30250E593609EA7DADCE13E1 /* libPods-SwiftHTMLTests.a in Frameworks */,
+				B4EDE8B53D0D75F2844AF470 /* libPods-SwiftHTMLTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF1A767DECC196699DF6AB32 /* libPods-SwiftHTML-SwiftHTMLUITests.a in Frameworks */,
+				43B0D490A201FDF9EBB25816 /* libPods-SwiftHTML-SwiftHTMLUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +141,7 @@
 				5790E81828C4855D002421DE /* SceneDelegate.swift */,
 				5790E81A28C4855D002421DE /* ViewController.swift */,
 				5790E85A28C48B75002421DE /* TableViewCellHandler.swift */,
+				674EBCD928DD36990086E682 /* WebViewController.swift */,
 				5790E81C28C4855D002421DE /* Main.storyboard */,
 				5790E81F28C4855D002421DE /* Assets.xcassets */,
 				5790E82128C4855D002421DE /* LaunchScreen.storyboard */,
@@ -169,9 +172,9 @@
 		61DF697F4BA49602347C4FF9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				92A8BACA0D4CA6DCBAFF3A24 /* libPods-SwiftHTML.a */,
-				DCDB117B35039959A9CC8906 /* libPods-SwiftHTML-SwiftHTMLUITests.a */,
-				C0338C1938D11DDC9E8B2ADC /* libPods-SwiftHTMLTests.a */,
+				FBCBDF8D0554D4DA79C89673 /* libPods-SwiftHTML.a */,
+				79CBF9FC746ABC398DC70121 /* libPods-SwiftHTML-SwiftHTMLUITests.a */,
+				FC09C037FB015EFF97642F0C /* libPods-SwiftHTMLTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				5790E81B28C4855D002421DE /* ViewController.swift in Sources */,
 				5790E81728C4855D002421DE /* AppDelegate.swift in Sources */,
 				5790E85B28C48B75002421DE /* TableViewCellHandler.swift in Sources */,
+				674EBCDA28DD36990086E682 /* WebViewController.swift in Sources */,
 				5790E81928C4855D002421DE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
