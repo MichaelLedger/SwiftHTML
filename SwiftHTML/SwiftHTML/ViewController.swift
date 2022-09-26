@@ -79,9 +79,9 @@ class ViewController: UIViewController {
     }
     
     func initData() {
-        let types: [MLCellType] = [.none,
+        let types: [MLCellType] = [.sde,
                                    .none,
-                                   .sde]
+                                   .none]
         /*[.android_alibaba_java,
                                    .ios,
                                    .ios_interview,
@@ -94,9 +94,10 @@ class ViewController: UIViewController {
                                    .korean,
                                    .japan]*/
         
-        let titles: [String] = ["百度",
-                                "微博热搜榜",
-                                "《软件设计工程师 (Software Design Engineer)》"]
+        let titles: [String] = ["《软件设计工程师 (Software Design Engineer)》",
+                                "百度",
+                                "微博热搜榜"
+                                ]
             /*["《阿里巴巴Java开发手册》",
                                 "《iOS》",
                                 "《iOS 工程师技能树》",
@@ -111,7 +112,7 @@ class ViewController: UIViewController {
         
         let bundleName = "gitbook"
         
-        let relativePaths = ["","","/sde/index.html"]
+        let relativePaths = ["/sde/index.html","",""]
             /*["/gitbook/Android-Alibaba-Java/index.html",
                              "/gitbook/iOS/index.html",
                              "/gitbook/iOS-interview/index.html",
@@ -124,7 +125,7 @@ class ViewController: UIViewController {
                              "/blog/korean.html",
                              "/blog/japan.html"]*/
         
-        let remoteUrlStrs = ["https://www.baidu.com", "https://s.weibo.com/top/summary", ""]
+        let remoteUrlStrs = ["", "https://www.baidu.com", "https://s.weibo.com/top/summary"]
         
         for i in 0..<types.count {
             let model = MLCellModel(type: types[i], title: titles[i], bundleName: bundleName, relativePath: relativePaths[i], remoteUrlStr: remoteUrlStrs[i])

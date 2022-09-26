@@ -32,14 +32,16 @@ class WebViewController: UIViewController {
     
     var switchBtn: UIBarButtonItem?
     
+    var scrollTopBtn: UIButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.isTranslucent = false
-        edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
+//        navigationController?.navigationBar.barTintColor = .white
+//        navigationController?.navigationBar.isTranslucent = false
+//        edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
         
         let web = setUpWKwebView()
         web.navigationDelegate = self
@@ -76,7 +78,10 @@ class WebViewController: UIViewController {
         }
         
         if model.type == .none {
-            webView?.load(URLRequest(url: URL(string: model.remoteUrlStr ?? "")!))
+            guard let url = URL(string: model.remoteUrlStr ?? "") else {
+                return
+            }
+            webView?.load(URLRequest(url: url))
         } else {
             let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
             delegate.httpServer.setDocumentRoot(model?.documentRoot())
@@ -85,12 +90,24 @@ class WebViewController: UIViewController {
             webView?.load(URLRequest(url: URL(string: localHttpAddress)!))
         }
         
-        let btn = UIButton(type: .custom)
-        btn.setTitleColor(.blue, for: .normal)
-        btn.frame = CGRect(origin: .zero, size: CGSize(width: 44, height: 44))
-        btn.setTitle("🔝", for: .normal)
-        btn.addTarget(self, action: #selector(self.test), for: .touchUpInside)
-        let scrollToTopBtn = UIBarButtonItem(customView: btn)
+        if model.type == .none {
+            let btn = UIButton(type: .custom)
+            btn.setTitleColor(.black, for: .normal)
+            btn.frame = CGRect(origin: .zero, size: CGSize(width: 44, height: 44))
+            btn.setTitle("🔝", for: .normal)
+            btn.addTarget(self, action: #selector(self.scrollToTop), for: .touchUpInside)
+            btn.layer.cornerRadius = 22
+            btn.clipsToBounds = true
+            btn.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.5)
+            view.addSubview(btn)
+            scrollTopBtn = btn
+            btn.snp.makeConstraints { make in
+                make.bottom.equalTo(view.safeAreaInsets.bottom).offset(-20)
+                make.trailing.equalTo(view.snp.trailing).offset(-view.safeAreaInsets.right - 20)
+                make.width.height.equalTo(44)
+            }
+    //        let scrollToTopBtn = UIBarButtonItem(customView: btn)
+        }
         
         let btn2 = UIButton(type: .custom)
         btn2.setTitleColor(.blue, for: .normal)
@@ -100,11 +117,13 @@ class WebViewController: UIViewController {
         let readTypeSwitchBtn = UIBarButtonItem(customView: btn2)
         switchBtn = readTypeSwitchBtn
         
-        if model.type == .none {
-            navigationItem.rightBarButtonItem = scrollToTopBtn
-        } else {
+//        if model.type == .none {
+//            navigationItem.rightBarButtonItem = scrollToTopBtn
+//        } else {
 //            navigationItem.rightBarButtonItem = readTypeSwitchBtn
-        }
+//        }
+        
+        
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -120,6 +139,16 @@ class WebViewController: UIViewController {
 //        let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 //        delegate.stopServer()
 //    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        print(view.safeAreaInsets)
+        scrollTopBtn?.snp.remakeConstraints { make in
+            make.bottom.equalTo(view.safeAreaInsets.bottom).offset(-20)
+//            make.trailing.equalTo(view.safeAreaInsets.right).offset(-20)
+            make.trailing.equalTo(view.snp.trailing).offset(-view.safeAreaInsets.right-20)
+            make.width.height.equalTo(44)
+        }
+    }
     
     func moveAppBundleToTempDir() -> (path: String?, success: Bool) {
         let htmlBundlePath = Bundle.main.path(forResource: "SDE", ofType: "bundle")
@@ -180,7 +209,7 @@ class WebViewController: UIViewController {
         return (tempBundlePath, success)
     }
     
-    @objc func test() {
+    @objc func scrollToTop() {
 //        print("\(String(describing: webView?.url))")
 //        webView?.evaluateJavaScript("window.scrollTo(0,0)", completionHandler: nil)
 //        webView?.scrollView.setContentOffset(.zero, animated: true)
@@ -195,6 +224,7 @@ class WebViewController: UIViewController {
 //        let script = "$(window).scrollTop(200);"
 //        let script = "window.scrollTo(0,0);"
         let script = "window.scrollTo({'behavior': 'smooth', 'top': 0});"
+        
         // 10.2.1系统ios控制台一直报错 this.$refs.container.scrollTo is undefined,我自己手机系统是13.6.1 可以正常滚动，我分别打出来发现，10.2.1系统手机没有scrollTo 方法，但是有个scrollTop属性！
 //        let script = "var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;window.scrollTo(0,0);var rs = document.getElementById('book-search-results');window.scrollTo({'behavior': 'smooth', 'top': rs.offsetTop});console.log('scrollToTopTest');"
 //        let script = "var rs=document.getElementById('book-search-results');rs.scrollTop=1;console.log(\"%o\",rs.scrollTop);"
@@ -216,6 +246,15 @@ class WebViewController: UIViewController {
 
          info: >> plugin "back-to-top-button" installed with success
          */
+    }
+    
+    private func registerImageClickAndHandler() {
+        let js = "var srcArr=[]; var allImage=document.getElementsByTagName('img');for(var i=0;i<allImage.length;i++){var image = allImage[i]; image.index = i;srcArr.push({'pic_url': image.src});image.onclick = function () {console.log('img-click');window.webkit.messageHandlers.\(getHtmlImagesHandlerName()).postMessage({'index':this.index,'srcArr':srcArr});}}"
+        webView?.evaluateJavaScript(js) { result, err in
+            if err != nil {
+                print(err?.localizedDescription ?? "")
+            }
+        }
     }
     
     /*
@@ -242,13 +281,12 @@ class WebViewController: UIViewController {
         let preferences = WKPreferences()
 //        preferences.javaScriptEnabled = true
         preferences.setValue(true, forKey:"allowFileAccessFromFileURLs")
+        preferences.javaScriptCanOpenWindowsAutomatically = true
+//        preferences.javaScriptEnabled = true
         
         let configuration = WKWebViewConfiguration()
         configuration.preferences = preferences
         configuration.allowsInlineMediaPlayback = true
-        
-        configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
-        configuration.preferences.javaScriptEnabled = true
         
         let pagePreferences = WKWebpagePreferences()
         pagePreferences.allowsContentJavaScript = true
@@ -256,7 +294,7 @@ class WebViewController: UIViewController {
         
         // register user script
         let js = "var srcArr=[]; var allImage=document.getElementsByTagName('img');for(var i=0;i<allImage.length;i++){var image = allImage[i]; image.index = i;srcArr.push({'pic_url': image.src});image.onclick = function () {console.log('img-click');window.webkit.messageHandlers.\(getHtmlImagesHandlerName()).postMessage({'index':this.index,'srcArr':srcArr});}}"
-        let userScript = WKUserScript.init(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false)//true
+        let userScript = WKUserScript.init(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         let uservc = WKUserContentController.init()
         uservc.addUserScript(userScript)
         // Adds a script message handler to the main world used by page content itself.
@@ -286,6 +324,7 @@ class WebViewController: UIViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == WebViewController.kObserveKeyPath {
             print("URL changed to:\n\(String(describing: webView?.url?.absoluteString))")
+            registerImageClickAndHandler()
         } else if keyPath == WebViewController.kObserveEstimatedProgress {
             progress?.progress = Float(webView!.estimatedProgress)
             if progress?.progress == 1 {
@@ -297,6 +336,7 @@ class WebViewController: UIViewController {
             }
         } else if keyPath == WebViewController.kObserveTitle {
             navigationItem.title = webView!.title
+            registerImageClickAndHandler()
         }
     }
 }
@@ -348,10 +388,18 @@ extension WebViewController: WKNavigationDelegate {
         } completion: { (finished) in
             self.progress?.isHidden = true
         }
-        //test
-        if model.type != .none {
-            webView.attachImageViewerGesture()
+        
+        let js = "var srcArr=[]; var allImage=document.getElementsByTagName('img');for(var i=0;i<allImage.length;i++){var image = allImage[i]; image.index = i;srcArr.push({'pic_url': image.src});image.onclick = function () {console.log('img-click');window.webkit.messageHandlers.\(getHtmlImagesHandlerName()).postMessage({'index':this.index,'srcArr':srcArr});}}"
+        webView.evaluateJavaScript(js) { result, err in
+            if err != nil {
+                print(err?.localizedDescription ?? "")
+            }
+            print(result ?? "")
         }
+
+//        if model.type != .none {
+//            webView.attachImageViewerGesture()
+//        }
     }
 }
 
@@ -361,10 +409,16 @@ extension WebViewController: WKScriptMessageHandler {
             let bodyTemp = message.body as! [String: Any]
             let index = bodyTemp["index"] as! Int
             
-            let images = bodyTemp["srcArr"] as! Array<String>
+            let images = bodyTemp["srcArr"] as! [Dictionary<String, Any>]
+            var imageUrls: [String] = []
+            for dic in images {
+                let url = dic["pic_url"]
+                imageUrls.append(url as! String)
+            }
+            
             
            //下面这个代码是我自己封装的查看网络图片的浏览器
-            self.webView?.showWebViewBrowser(index: index, images: images)
+            self.webView?.showWebViewBrowser(index: index, images: imageUrls)
         }
     }
     
