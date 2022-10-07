@@ -38,10 +38,11 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        navigationController?.view.backgroundColor = .white
         
 //        navigationController?.navigationBar.barTintColor = .white
 //        navigationController?.navigationBar.isTranslucent = false
-//        edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
+        edgesForExtendedLayout = UIRectEdge.bottom//UIRectEdge.init(rawValue: 0)
         
         let web = setUpWKwebView()
         web.navigationDelegate = self
