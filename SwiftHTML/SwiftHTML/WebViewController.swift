@@ -125,6 +125,16 @@ class WebViewController: UIViewController {
 //        }
         
         
+        let backCustomBtn = UIButton(type: .custom)
+        backCustomBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 44)
+        backCustomBtn.imageView?.tintColor = .black
+        backCustomBtn.contentHorizontalAlignment = .leading
+        backCustomBtn.setImage(UIImage(named: "back_normal")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        backCustomBtn.setImage(UIImage(named: "back_pressed")?.withRenderingMode(.alwaysTemplate), for: .highlighted)
+        backCustomBtn.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
+        let backBtn = UIBarButtonItem(customView: backCustomBtn)
+        
+        navigationItem.leftBarButtonItems = [backBtn]
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -401,6 +411,50 @@ extension WebViewController: WKNavigationDelegate {
 //        if model.type != .none {
 //            webView.attachImageViewerGesture()
 //        }
+        
+        
+        let closeCustomBtn = UIButton(type: .custom)
+        closeCustomBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 44)
+        closeCustomBtn.imageView?.tintColor = .black
+        closeCustomBtn.contentHorizontalAlignment = .leading
+        closeCustomBtn.setImage(UIImage(named: "close_normal")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        closeCustomBtn.setImage(UIImage(named: "close_pressed")?.withRenderingMode(.alwaysTemplate), for: .highlighted)
+        closeCustomBtn.addTarget(self, action: #selector(closeAction(sender:)), for: .touchUpInside)
+        let closeBtn = UIBarButtonItem(customView: closeCustomBtn)
+        
+        //https://www.freesion.com/article/7266944264/
+        //iOS 11改动相当大的就是导航栏的部分,在原来的已经复杂的不要的图层中又新增了新的图层!
+        // _UINavigationBarContentView和_UIButtonBarStackView和_UITAMICAdaptorView
+        // 而我们之前的leftBarButtonItem什么的现在都在UIButtonBarStackView中了
+//        let spaceBtn = UIBarButtonItem(systemItem: .fixedSpace)
+//        spaceBtn.width = -8
+        
+        let backCustomBtn = UIButton(type: .custom)
+        backCustomBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 44)
+        backCustomBtn.imageView?.tintColor = .black
+        backCustomBtn.contentHorizontalAlignment = .leading
+        backCustomBtn.setImage(UIImage(named: "back_normal")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        backCustomBtn.setImage(UIImage(named: "back_pressed")?.withRenderingMode(.alwaysTemplate), for: .highlighted)
+        backCustomBtn.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
+        let backBtn = UIBarButtonItem(customView: backCustomBtn)
+        
+        if webView.canGoBack || model.type != .none {
+            navigationItem.leftBarButtonItems = [backBtn, closeBtn]
+        } else {
+            navigationItem.leftBarButtonItems = [backBtn]
+        }
+    }
+    
+    @objc func closeAction(sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func backAction(sender: UIBarButtonItem) {
+        if webView!.canGoBack {
+            webView?.goBack()
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 
