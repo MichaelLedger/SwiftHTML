@@ -83,6 +83,22 @@ class WebViewController: UIViewController {
                 return
             }
             webView?.load(URLRequest(url: url))
+        } else if model.type == .pdf {
+            navigationItem.title = model.title
+            let filePath: String = Bundle.main.path(forResource: model.relativePath, ofType: nil) ?? ""
+            
+            //iOS14系统中wkwebview加载PDF文件空白的解决方法
+//            do {
+//                let data = NSData(contentsOfFile: filePath)
+//                let accessURL = fileURL.deletingLastPathComponent()
+//                webView?.load(data as! Data, mimeType: "application/pdf", characterEncodingName: "utf-8", baseURL: nil)
+//            } catch let e {
+//                print(e)
+//            }
+            
+            let fileURL = URL(fileURLWithPath: filePath)//本地文件路径
+            let accessURL = fileURL.deletingLastPathComponent()
+            webView?.loadFileURL(fileURL, allowingReadAccessTo: accessURL)//iOS10本地权限
         } else {
             let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
             delegate.httpServer.setDocumentRoot(model?.documentRoot())
@@ -438,7 +454,7 @@ extension WebViewController: WKNavigationDelegate {
         backCustomBtn.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
         let backBtn = UIBarButtonItem(customView: backCustomBtn)
         
-        if webView.canGoBack || model.type != .none {
+        if webView.canGoBack || (model.type != .none && model.type != .pdf) {
             navigationItem.leftBarButtonItems = [backBtn, closeBtn]
         } else {
             navigationItem.leftBarButtonItems = [backBtn]

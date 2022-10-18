@@ -25,6 +25,9 @@ enum MLCellType {
     case academic
     case korean
     case japan
+    
+    //pdf
+    case pdf
 }
 
 class MLCellModel: NSObject {
@@ -80,6 +83,7 @@ class ViewController: UIViewController {
     
     func initData() {
         let types: [MLCellType] = [.sde,
+                                   .pdf,
                                    .none,
                                    .none]
         /*[.android_alibaba_java,
@@ -94,7 +98,8 @@ class ViewController: UIViewController {
                                    .korean,
                                    .japan]*/
         
-        let titles: [String] = ["《软件设计工程师 (Software Design Engineer)》",
+        let titles: [String] = ["软件设计工程师 (Software Design Engineer)",
+                                "《软件设计师教程（第5版）》",
                                 "百度",
                                 "微博热搜榜"
                                 ]
@@ -112,7 +117,7 @@ class ViewController: UIViewController {
         
         let bundleName = "gitbook"
         
-        let relativePaths = ["/sde/index.html","",""]
+        let relativePaths = ["/sde/index.html","软件设计师教程（第5版）.pdf","",""]
             /*["/gitbook/Android-Alibaba-Java/index.html",
                              "/gitbook/iOS/index.html",
                              "/gitbook/iOS-interview/index.html",
@@ -125,7 +130,7 @@ class ViewController: UIViewController {
                              "/blog/korean.html",
                              "/blog/japan.html"]*/
         
-        let remoteUrlStrs = ["", "https://www.baidu.com", "https://s.weibo.com/top/summary"]
+        let remoteUrlStrs = ["", "", "https://www.baidu.com", "https://s.weibo.com/top/summary"]
         
         for i in 0..<types.count {
             let model = MLCellModel(type: types[i], title: titles[i], bundleName: bundleName, relativePath: relativePaths[i], remoteUrlStr: remoteUrlStrs[i])

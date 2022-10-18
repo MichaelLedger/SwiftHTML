@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		43B0D490A201FDF9EBB25816 /* libPods-SwiftHTML-SwiftHTMLUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CBF9FC746ABC398DC70121 /* libPods-SwiftHTML-SwiftHTMLUITests.a */; };
+		57408EEE28FEFA9300732DF4 /* 软件设计师教程（第5版）.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 57408EED28FEFA9300732DF4 /* 软件设计师教程（第5版）.pdf */; };
 		5790E81728C4855D002421DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E81628C4855D002421DE /* AppDelegate.swift */; };
 		5790E81928C4855D002421DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E81828C4855D002421DE /* SceneDelegate.swift */; };
 		5790E81B28C4855D002421DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790E81A28C4855D002421DE /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		57408EED28FEFA9300732DF4 /* 软件设计师教程（第5版）.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "软件设计师教程（第5版）.pdf"; path = "../../软件设计师教程（第5版）.pdf"; sourceTree = "<group>"; };
 		5786A94C28C59FF800343358 /* SwiftHTML-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftHTML-Bridging-Header.h"; sourceTree = "<group>"; };
 		5790E81328C4855D002421DE /* SwiftHTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftHTML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5790E81628C4855D002421DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		5790E81528C4855D002421DE /* SwiftHTML */ = {
 			isa = PBXGroup;
 			children = (
+				57408EED28FEFA9300732DF4 /* 软件设计师教程（第5版）.pdf */,
 				57A76A9628D8BB12001622C2 /* gitbook.bundle */,
 				5790E81628C4855D002421DE /* AppDelegate.swift */,
 				5790E81828C4855D002421DE /* SceneDelegate.swift */,
@@ -289,6 +292,7 @@
 				5790E82328C4855D002421DE /* LaunchScreen.storyboard in Resources */,
 				57A76A9728D8BB12001622C2 /* gitbook.bundle in Resources */,
 				5790E82028C4855D002421DE /* Assets.xcassets in Resources */,
+				57408EEE28FEFA9300732DF4 /* 软件设计师教程（第5版）.pdf in Resources */,
 				5790E81E28C4855D002421DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
