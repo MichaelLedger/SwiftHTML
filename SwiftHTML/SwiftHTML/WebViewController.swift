@@ -119,7 +119,7 @@ class WebViewController: UIViewController {
             view.addSubview(btn)
             scrollTopBtn = btn
             btn.snp.makeConstraints { make in
-                make.bottom.equalTo(view.safeAreaInsets.bottom).offset(-20)
+                make.bottom.equalTo(view.safeAreaInsets.bottom).offset(-60)
                 make.trailing.equalTo(view.snp.trailing).offset(-view.safeAreaInsets.right - 20)
                 make.width.height.equalTo(44)
             }
@@ -170,7 +170,7 @@ class WebViewController: UIViewController {
     override func viewSafeAreaInsetsDidChange() {
         print(view.safeAreaInsets)
         scrollTopBtn?.snp.remakeConstraints { make in
-            make.bottom.equalTo(view.safeAreaInsets.bottom).offset(-20)
+            make.bottom.equalTo(view.safeAreaInsets.bottom).offset(-60)
 //            make.trailing.equalTo(view.safeAreaInsets.right).offset(-20)
             make.trailing.equalTo(view.snp.trailing).offset(-view.safeAreaInsets.right-20)
             make.width.height.equalTo(44)
